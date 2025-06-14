@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Usuarios</title>
@@ -9,7 +9,7 @@
 <body>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Lista de Usuarios</h1>
-    <div class="mb-3 text-right">
+    <div class="mb-3 text-right" sec:authorize="hasRole('ADMIN')">
         <a class="btn btn-success" th:href="@{/users/crear}">Nuevo Usuario</a>
     </div>
     <div th:if="${mensaje != null}" class="alert alert-success" th:text="${mensaje}"></div>
@@ -22,7 +22,7 @@
                 <th>Email</th>
                 <th>Rol</th>
                 <th>Estado</th>
-                <th>Acciones</th>
+                <th sec:authorize="hasRole('ADMIN')">Acciones</th>
             </tr>
             </thead>
             <tbody>
@@ -34,7 +34,7 @@
                 <td>
                     <span class="badge badge-success">Activo</span>
                 </td>
-                <td>
+                <td sec:authorize="hasRole('ADMIN')">
                     <a th:href="@{'/users/editar/' + ${user.username}}" class="btn btn-primary btn-sm">Editar</a>
                     <a th:href="@{'/users/eliminar/' + ${user.username}}"
                        class="btn btn-danger btn-sm"
