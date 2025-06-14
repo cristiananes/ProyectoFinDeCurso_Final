@@ -40,7 +40,6 @@ public class EstadisticasService {
         LocalDate limite = hoy.plusDays(30);
         return contratoRepository.countByFechaFinBetween(hoy, limite);
     }
-/*
     // 4. Calcular ingresos mensuales totales
     public Double calcularIngresosMensuales() {
         return contratoRepository.sumPrecioByEstadoTrue();
@@ -52,7 +51,6 @@ public class EstadisticasService {
         LocalDate fin = LocalDate.of(anio, 12, 31);
         return contratoRepository.countByFechaInicioBetween(inicio, fin);
     }
-*/
     // 6. PERSONALIZABLE: Contar pagos superiores a un monto
     public long contarPagosSuperioresA(double monto) {
         return pagoRepository.countByCantidadEsperadaGreaterThan((int)monto);

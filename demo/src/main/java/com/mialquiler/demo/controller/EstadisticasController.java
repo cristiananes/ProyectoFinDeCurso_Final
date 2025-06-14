@@ -24,11 +24,11 @@ public class EstadisticasController {
         mav.addObject("propiedadesDisponibles", estadisticasService.contarPropiedadesDisponibles());
         mav.addObject("propiedadesOcupadas", estadisticasService.contarPropiedadesOcupadas());
         mav.addObject("contratosPorVencer30Dias", estadisticasService.contarContratosPorVencer30Dias());
-        //mav.addObject("totalIngresosMensuales", estadisticasService.calcularIngresosMensuales());
+        mav.addObject("totalIngresosMensuales", estadisticasService.calcularIngresosMensuales());
 
         // Estadísticas personalizables
         if (anio != null) {
-            //mav.addObject("contratosPorAnio", estadisticasService.contarContratosPorAnio(anio));
+            mav.addObject("contratosPorAnio", estadisticasService.contarContratosPorAnio(anio));
             mav.addObject("anioConsultado", anio);
         }
 
