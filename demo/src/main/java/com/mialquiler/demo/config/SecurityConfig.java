@@ -17,13 +17,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-<<<<<<< HEAD
     // Inyectar el UserDetailsService personalizado
     @Autowired
     private DatabaseUserDetailsService userDetailsService;
 
-=======
->>>>>>> 56583d66547f93991d0d6e8bb1399da0570643a9
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
