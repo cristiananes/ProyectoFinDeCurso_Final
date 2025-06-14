@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <title>Lista de propiedades</title>
 </head>
 <body>
 <h1>Propiedades registradas</h1>
-<a th:href="@{/propiedades/crear}">Añadir nueva propiedad</a>
+<a th:href="@{/propiedades/crear}" sec:authorize="hasRole('ADMIN')">Añadir nueva propiedad</a>
 <table border="1">
     <thead>
     <tr>
@@ -15,7 +15,7 @@
         <th>Precio</th>
         <th>Estado</th>
         <th>Dueño</th>
-        <th>Acciones</th>
+        <th sec:authorize="hasRole('ADMIN')">Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -26,7 +26,7 @@
         <td th:text="${propiedad.precio}"></td>
         <td th:text="${propiedad.estado}"></td>
         <td th:text="${propiedad.duenio?.username}"></td>
-        <td>
+        <td sec:authorize="hasRole('ADMIN')">
             <a th:href="@{'/propiedades/editar/' + ${propiedad.id}}">Editar</a> |
             <a th:href="@{'/propiedades/eliminar/' + ${propiedad.id}}"
                onclick="return confirm('¿Está seguro de eliminar esta propiedad?')">Eliminar</a>
