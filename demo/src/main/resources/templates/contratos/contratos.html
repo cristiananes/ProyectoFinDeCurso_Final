@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Lista de contratos</title>
+</head>
+<body>
+<h1>Contratos registrados</h1>
+<a th:href="@{/contratos/crear}">Añadir nuevo contrato</a>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Inquilino</th>
+    <th>Fecha Inicio</th>
+    <th>Fecha Fin</th>
+    <th>Precio</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="contrato : ${contratos}">
+    <td th:text="${contrato.id}"></td>
+    <td th:text="${contrato.inquilino.username}"></td>
+    <td th:text="${contrato.fechaInicio}"></td>
+    <td th:text="${contrato.fechaFin}"></td>
+    <td th:text="${contrato.precio}"></td>
+    <td>
+      <a th:href="@{'/contratos/editar/' + ${contrato.id}}" class="btn btn-primary btn-sm">Editar</a>
+      <a th:href="@{'/contratos/eliminar/' + ${contrato.id}}">Eliminar</a>
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

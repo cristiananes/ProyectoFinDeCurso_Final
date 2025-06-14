@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de pagos</title>
+</head>
+<body>
+<h1>Pagos registrados</h1>
+<a th:href="@{/pagos/crear}">Registrar nuevo pago</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Contrato</th>
+        <th>Fecha prevista</th>
+        <th>Fecha real</th>
+        <th>Cantidad esperada</th>
+        <th>Cantidad abonada</th>
+        <th>Retraso</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pago : ${pagos}">
+        <td th:text="${pago.id}">1</td>
+        <td th:text="${pago.contrato != null ? pago.contrato.id : 'N/A'}">Contrato</td>
+        <td th:text="${pago.fechaPrevista}">2025-01-01</td>
+        <td th:text="${pago.fechaReal}">2025-01-02</td>
+        <td th:text="${pago.cantidadEsperada}">500</td>
+        <td th:text="${pago.cantidadAbonada}">500</td>
+        <td th:text="${pago.retraso}">0</td>
+        <td th:text="${pago.estado ? 'Pagado' : 'Pendiente'}">Estado</td>
+        <td>
+            <a th:href="@{'/pagos/editar/' + ${pago.id}}" class="btn btn-primary btn-sm">Editar</a>
+            <a th:href="@{'/pagos/eliminar/' + ${pago.id}}">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

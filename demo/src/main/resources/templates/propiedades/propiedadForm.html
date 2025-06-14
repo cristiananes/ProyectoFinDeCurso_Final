@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Formulario de propiedad</title>
+</head>
+<body>
+<h1>Crear nueva propiedad</h1>
+<form th:action="@{/propiedades/crear}" th:object="${propiedad}" method="post">
+  <label>Dirección:</label>
+  <input type="text" th:field="*{direccion}" /><br/>
+
+  <label>Descripción:</label>
+  <input type="text" th:field="*{descripcion}" /><br/>
+
+  <label>Precio:</label>
+  <input type="number" th:field="*{precio}" /><br/>
+
+  <label>Estado:</label>
+  <input type="text" th:field="*{estado}" /><br/>
+
+  <label>Dueño:</label>
+  <select th:field="*{duenio}">
+    <option th:each="usuario : ${usuarios}"
+            th:value="${usuario}"
+            th:text="${usuario.username}">
+    </option>
+  </select><br/>
+
+  <button type="submit">Guardar</button>
+</form>
+</body>
+</html>

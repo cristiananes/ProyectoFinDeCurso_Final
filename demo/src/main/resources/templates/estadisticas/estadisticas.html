@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Estadísticas - MiAlquiler</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><i class="fas fa-home"></i> MiAlquiler</a>
+    <div class="navbar-nav ml-auto">
+        <a class="nav-link" href="/users/all"><i class="fas fa-users"></i> Usuarios</a>
+        <a class="nav-link" href="/propiedades/all"><i class="fas fa-building"></i> Propiedades</a>
+        <a class="nav-link" href="/contratos/all"><i class="fas fa-file-contract"></i> Contratos</a>
+        <a class="nav-link" href="/pagos/all"><i class="fas fa-credit-card"></i> Pagos</a>
+        <a class="nav-link active" href="/estadisticas"><i class="fas fa-chart-bar"></i> Estadísticas</a>
+    </div>
+</nav>
+
+<div class="container-fluid mt-4">
+    <h1><i class="fas fa-chart-bar"></i> Estadísticas del Sistema</h1>
+
+    <!-- Estadísticas fijas -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-left-primary">
+                <div class="card-body">
+                    <h5>Total Usuarios</h5>
+                    <h2 th:text="${totalUsuarios}">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-left-success">
+                <div class="card-body">
+                    <h5>Total Propiedades</h5>
+                    <h2 th:text="${totalPropiedades}">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-left-info">
+                <div class="card-body">
+                    <h5>Propiedades Disponibles</h5>
+                    <h2 th:text="${propiedadesDisponibles}">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-left-warning">
+                <div class="card-body">
+                    <h5>Pagos Atrasados</h5>
+                    <h2 th:text="${pagosAtrasados}">0</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas personalizables -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Contratos por Vencer (Personalizable)</h5>
+                </div>
+                <div class="card-body">
+                    <form method="get">
+                        <div class="form-group">
+                            <label>Días hasta vencimiento:</label>
+                            <input type="number" name="dias" th:value="${diasParam}" class="form-control" min="1" max="365">
+                        </div>
+                        <input type="hidden" name="precioMinimo" th:value="${precioParam}">
+                        <button type="submit" class="btn btn-primary">Consultar</button>
+                    </form>
+                    <hr>
+                    <h3 th:text="${contratosPorVencer}">0</h3>
+                    <p>contratos vencen en <span th:text="${diasParam}">30</span> días</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Propiedades por Precio (Personalizable)</h5>
+                </div>
+                <div class="card-body">
+                    <form method="get">
+                        <div class="form-group">
+                            <label>Precio mínimo (€):</label>
+                            <input type="number" name="precioMinimo" th:value="${precioParam}" class="form-control" min="0">
+                        </div>
+                        <input type="hidden" name="dias" th:value="${diasParam}">
+                        <button type="submit" class="btn btn-primary">Consultar</button>
+                    </form>
+                    <hr>
+                    <h3 th:text="${propiedadesCaras}">0</h3>
+                    <p>propiedades con precio mayor a <span th:text="${precioParam}">500</span>€</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .border-left-primary { border-left: 4px solid #007bff; }
+    .border-left-success { border-left: 4px solid #28a745; }
+    .border-left-info { border-left: 4px solid #17a2b8; }
+    .border-left-warning { border-left: 4px solid #ffc107; }
+</style>
+</body>
+</html>

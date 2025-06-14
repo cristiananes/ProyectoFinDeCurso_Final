@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de propiedades</title>
+</head>
+<body>
+<h1>Propiedades registradas</h1>
+<a th:href="@{/propiedades/crear}">Añadir nueva propiedad</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Dirección</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Estado</th>
+        <th>Dueño</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="propiedad : ${propiedades}">
+        <td th:text="${propiedad.id}"></td>
+        <td th:text="${propiedad.direccion}"></td>
+        <td th:text="${propiedad.descripcion}"></td>
+        <td th:text="${propiedad.precio}"></td>
+        <td th:text="${propiedad.estado}"></td>
+        <td th:text="${propiedad.duenio.username}"></td>
+        <td>
+            <a th:href="@{'/propiedades/editar/' + ${propiedad.id}}" class="btn btn-primary btn-sm">Editar</a>
+            <a th:href="@{'/propiedades/eliminar/' + ${propiedad.id}}">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
