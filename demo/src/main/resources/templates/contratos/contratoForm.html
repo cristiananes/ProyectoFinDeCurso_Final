@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Formulario de contrato</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base('Formulario de contrato', ~{::body})">
 <body>
 <h1 th:text="${esEdicion} ? 'Editar contrato' : 'Crear nuevo contrato'">Formulario de contrato</h1>
 <form th:action="${esEdicion} ? @{'/contratos/actualizar/' + ${contrato.id}} : @{/contratos/crear}"

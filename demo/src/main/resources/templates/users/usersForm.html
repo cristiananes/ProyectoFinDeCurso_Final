@@ -1,11 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title th:text="${esEdicion} ? 'Editar Usuario' : 'Crear Usuario'">Formulario Usuario</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base(${esEdicion} ? 'Editar Usuario' : 'Crear Usuario', ~{::body})">
 <body>
 <div class="container mt-5">
   <h1 class="text-center mb-4" th:text="${esEdicion} ? 'Editar Usuario' : 'Crear Usuario'">Formulario Usuario</h1>

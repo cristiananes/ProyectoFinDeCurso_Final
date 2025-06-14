@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Lista de pagos</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base('Lista de pagos', ~{::body})">
 <body>
-<h1>Pagos registrados</h1>
+    <h1>Pagos registrados</h1>
 <a th:href="@{/pagos/crear}">Registrar nuevo pago</a>
 <table border="1">
     <thead>

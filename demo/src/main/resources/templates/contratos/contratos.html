@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Lista de contratos</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base('Lista de contratos', ~{::body})">
 <body>
-<h1>Contratos registrados</h1>
+  <h1>Contratos registrados</h1>
 <a th:href="@{/contratos/crear}">Añadir nuevo contrato</a>
 <table border="1">
   <thead>

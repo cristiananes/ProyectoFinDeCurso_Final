@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Formulario Asignación</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base('Formulario Asignación', ~{::body})">
 <body>
 <h1 th:text="${esEdicion} ? 'Editar Asignación' : 'Nueva Asignación'">Formulario</h1>
 <form th:action="${esEdicion} ? @{'/propiedad-contrato/actualizar/' + ${asignacion.propiedad.id} + '/' + ${asignacion.contrato_propiedad.id}} : @{/propiedad-contrato/crear}"

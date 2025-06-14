@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title th:text="${esEdicion} ? 'Editar pago' : 'Registrar nuevo pago'">Formulario de pago</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base(${esEdicion} ? 'Editar pago' : 'Registrar nuevo pago', ~{::body})">
 <body>
 <h1 th:text="${esEdicion} ? 'Editar pago' : 'Registrar nuevo pago'">Formulario de pago</h1>
 <form th:action="${esEdicion} ? @{'/pagos/actualizar/' + ${pago.id}} : @{/pagos/crear}"
