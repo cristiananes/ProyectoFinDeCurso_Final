@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Asignaciones Propiedad-Contrato</title>
+</head>
+<body>
+<h1>Asignaciones de Propiedades a Contratos</h1>
+<a th:href="@{/propiedad-contrato/crear}">Nueva Asignación</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Propiedad</th>
+        <th>Contrato</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="asignacion : ${asignaciones}">
+        <td th:text="${asignacion.propiedad.direccion}"></td>
+        <td th:text="'Contrato #' + ${asignacion.contrato_propiedad.id}"></td>
+        <td th:text="${asignacion.estado}"></td>
+        <td>
+            <a th:href="@{'/propiedad-contrato/editar/' + ${asignacion.propiedad.id} + '/' + ${asignacion.contrato_propiedad.id}}">Editar</a> |
+            <a th:href="@{'/propiedad-contrato/eliminar/' + ${asignacion.propiedad.id} + '/' + ${asignacion.contrato_propiedad.id}}"
+               onclick="return confirm('¿Está seguro de eliminar esta asignación?')">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

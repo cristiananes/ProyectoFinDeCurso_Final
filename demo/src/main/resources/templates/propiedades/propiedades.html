@@ -25,10 +25,11 @@
         <td th:text="${propiedad.descripcion}"></td>
         <td th:text="${propiedad.precio}"></td>
         <td th:text="${propiedad.estado}"></td>
-        <td th:text="${propiedad.duenio.username}"></td>
+        <td th:text="${propiedad.duenio?.username}"></td>
         <td>
-            <a th:href="@{'/propiedades/editar/' + ${propiedad.id}}" class="btn btn-primary btn-sm">Editar</a>
-            <a th:href="@{'/propiedades/eliminar/' + ${propiedad.id}}">Eliminar</a>
+            <a th:href="@{'/propiedades/editar/' + ${propiedad.id}}">Editar</a> |
+            <a th:href="@{'/propiedades/eliminar/' + ${propiedad.id}}"
+               onclick="return confirm('¿Está seguro de eliminar esta propiedad?')">Eliminar</a>
         </td>
     </tr>
     </tbody>

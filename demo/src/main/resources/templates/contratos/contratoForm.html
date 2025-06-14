@@ -4,27 +4,36 @@
   <title>Formulario de contrato</title>
 </head>
 <body>
-<h1>Crear nuevo contrato</h1>
-<form th:action="@{/contratos/crear}" th:object="${contrato}" method="post">
+<h1 th:text="${esEdicion} ? 'Editar contrato' : 'Crear nuevo contrato'">Formulario de contrato</h1>
+<form th:action="${esEdicion} ? @{'/contratos/actualizar/' + ${contrato.id}} : @{/contratos/crear}"
+      th:object="${contrato}" method="post">
+
   <label>Inquilino:</label>
   <select th:field="*{inquilino}">
     <option th:each="usuario : ${usuarios}"
             th:if="${usuario.rol == 'INQUILINO'}"
-            th:value="${usuario}"
+            th:value="${usuario.username}"
             th:text="${usuario.username}">
     </option>
   </select><br/>
 
   <label>Fecha inicio:</label>
-  <input type="date" th:field="*{fechaInicio}" /><br/>
+  <input type="date" th:field="*{fechaInicio}" required/><br/>
 
   <label>Fecha fin:</label>
-  <input type="date" th:field="*{fechaFin}" /><br/>
+  <input type="date" th:field="*{fechaFin}" required/><br/>
 
   <label>Precio acordado:</label>
-  <input type="number" step="0.01" th:field="*{precio}" /><br/>
+  <input type="number" step="0.01" th:field="*{precio}" required/><br/>
 
-  <button type="submit">Guardar</button>
+  <label>Estado:</label>
+  <select th:field="*{estado}">
+    <option th:value="true">Activo</option>
+    <option th:value="false">Inactivo</option>
+  </select><br/>
+
+  <button type="submit" th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
+  <a th:href="@{/contratos/all}">Cancelar</a>
 </form>
 </body>
 </html>

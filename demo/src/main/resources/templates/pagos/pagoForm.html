@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Formulario de pago</title>
+    <title th:text="${esEdicion} ? 'Editar pago' : 'Registrar nuevo pago'">Formulario de pago</title>
 </head>
 <body>
-<h1>Registrar nuevo pago</h1>
-<form th:action="@{/pagos/crear}" th:object="${pago}" method="post">
+<h1 th:text="${esEdicion} ? 'Editar pago' : 'Registrar nuevo pago'">Formulario de pago</h1>
+<form th:action="${esEdicion} ? @{'/pagos/actualizar/' + ${pago.id}} : @{/pagos/crear}"
+      th:object="${pago}" method="post">
+
     <label>Contrato:</label>
-    <select th:field="*{contrato}">
-        <option th:each="contrato : ${contratos}" th:value="${contrato.id}"
-                th:text="'Contrato #' + ${contrato.id}"></option>
-
-
-
+    <select th:field="*{contrato}" th:disabled="${esEdicion}" required>
+        <option value="">Seleccione un contrato</option>
+        <option th:each="contrato : ${contratos}"
+                th:value="${contrato.id}"
+                th:text="'Contrato #' + ${contrato.id} + ' - ' + ${contrato.inquilino?.username}"
+                th:selected="${pago.contrato != null && pago.contrato.id == contrato.id}">
+        </option>
     </select><br/>
 
     <label>Fecha prevista:</label>
-    <input type="date" th:field="*{fechaPrevista}" /><br/>
+    <input type="date" th:field="*{fechaPrevista}" required/><br/>
 
     <label>Fecha real:</label>
-    <input type="date" th:field="*{fechaReal}" /><br/>
+    <input type="date" th:field="*{fechaReal}"/><br/>
 
     <label>Cantidad esperada:</label>
-    <input type="number" th:field="*{cantidadEsperada}" /><br/>
+    <input type="number" th:field="*{cantidadEsperada}" required/><br/>
 
     <label>Cantidad abonada:</label>
-    <input type="number" th:field="*{cantidadAbonada}" /><br/>
-
-    <label>Retraso (en días):</label>
-    <input type="number" th:field="*{retraso}" /><br/>
+    <input type="number" th:field="*{cantidadAbonada}"/><br/>
 
     <label>Estado:</label>
     <select th:field="*{estado}">
@@ -36,7 +36,8 @@
         <option th:value="false">Pendiente</option>
     </select><br/>
 
-    <button type="submit">Guardar</button>
+    <button type="submit" th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
+    <a th:href="@{/pagos/all}">Cancelar</a>
 </form>
 </body>
 </html>

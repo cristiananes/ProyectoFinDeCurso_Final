@@ -2,31 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title th:text="${isEdit} ? 'Editar Usuario' : 'Crear Usuario'">Crear Usuario</title>
+  <title th:text="${esEdicion} ? 'Editar Usuario' : 'Crear Usuario'">Formulario Usuario</title>
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-5">
-  <h1 class="text-center mb-4" th:text="${isEdit} ? 'Editar Usuario' : 'Crear Usuario'">Crear Usuario</h1>
+  <h1 class="text-center mb-4" th:text="${esEdicion} ? 'Editar Usuario' : 'Crear Usuario'">Formulario Usuario</h1>
 
-  <form th:action="${isEdit} ? @{/users/update} : @{/users/create}" th:object="${usuario}" method="post">
+  <form th:action="${esEdicion} ? @{'/users/actualizar/' + ${usuario.username}} : @{/users/create}"
+        th:object="${usuario}" method="post">
+
     <div th:if="${mensaje != null}" class="alert alert-danger" th:text="${mensaje}"></div>
 
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" th:field="*{username}" class="form-control" id="username"
-             th:readonly="${isEdit}" placeholder="Ingrese username" required>
+             placeholder="Ingrese username" th:readonly="${esEdicion}" required>
     </div>
 
     <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Ingrese nombre" required>
+      <input type="text" th:field="*{nombre}" class="form-control" id="nombre"
+             placeholder="Ingrese nombre" required>
     </div>
 
     <div class="form-group">
       <label for="rol">Rol</label>
       <select th:field="*{rol}" class="form-control" id="rol" required>
-        <option value="">Seleccionar rol</option>
         <option value="ADMIN">Administrador</option>
         <option value="PROPIETARIO">Propietario</option>
         <option value="INQUILINO">Inquilino</option>
@@ -41,28 +44,25 @@
 
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Ingrese email" required>
+      <input type="email" th:field="*{email}" class="form-control" id="email"
+             placeholder="Ingrese email" required>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" th:if="${!esEdicion}">
       <label for="contrasenia">Contraseña</label>
       <input type="password" th:field="*{contrasenia}" class="form-control" id="contrasenia"
-             placeholder="Ingrese contraseña" required>
+             placeholder="Ingrese contraseña" th:required="${!esEdicion}">
     </div>
 
     <div class="form-group">
       <label for="deuda">Deuda</label>
-      <input type="number" th:field="*{deuda}" class="form-control" id="deuda" placeholder="Ingrese deuda" min="0">
-    </div>
-
-    <div class="form-check">
-      <input type="checkbox" th:field="*{eliminado}" class="form-check-input" id="eliminado">
-      <label class="form-check-label" for="eliminado">Eliminado</label>
+      <input type="number" th:field="*{deuda}" class="form-control" id="deuda"
+             placeholder="Ingrese deuda" min="0" value="0">
     </div>
 
     <button type="submit" class="btn btn-primary mt-3"
-            th:text="${isEdit} ? 'Actualizar Usuario' : 'Crear Usuario'">Crear Usuario</button>
-    <a href="/users/all" class="btn btn-secondary mt-3">Cancelar</a>
+            th:text="${esEdicion} ? 'Actualizar Usuario' : 'Crear Usuario'">Guardar</button>
+    <a th:href="@{/users/all}" class="btn btn-secondary mt-3">Cancelar</a>
   </form>
 </div>
 </body>

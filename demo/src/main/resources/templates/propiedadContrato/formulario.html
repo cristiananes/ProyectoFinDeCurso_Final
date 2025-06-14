@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Asignación</title>
+</head>
+<body>
+<h1 th:text="${esEdicion} ? 'Editar Asignación' : 'Nueva Asignación'">Formulario</h1>
+<form th:action="${esEdicion} ? @{'/propiedad-contrato/actualizar/' + ${asignacion.propiedad.id} + '/' + ${asignacion.contrato_propiedad.id}} : @{/propiedad-contrato/crear}"
+      method="post">
+
+    <div th:if="${!esEdicion}">
+        <label>Propiedad:</label>
+        <select name="idPropiedad" required>
+            <option value="">Seleccione una propiedad</option>
+            <option th:each="propiedad : ${propiedades}"
+                    th:value="${propiedad.id}"
+                    th:text="${propiedad.direccion}">
+            </option>
+        </select><br/>
+
+        <label>Contrato:</label>
+        <select name="idContrato" required>
+            <option value="">Seleccione un contrato</option>
+            <option th:each="contrato : ${contratos}"
+                    th:value="${contrato.id}"
+                    th:text="'Contrato #' + ${contrato.id} + ' - ' + ${contrato.inquilino?.username}">
+            </option>
+        </select><br/>
+    </div>
+
+    <div th:if="${esEdicion}">
+        <p><strong>Propiedad:</strong> <span th:text="${asignacion.propiedad.direccion}"></span></p>
+        <p><strong>Contrato:</strong> <span th:text="'#' + ${asignacion.contrato_propiedad.id}"></span></p>
+    </div>
+
+    <label>Estado:</label>
+    <input type="text" name="estado"
+           th:value="${esEdicion} ? ${asignacion.estado} : ''"
+           placeholder="Ej: Activo, En revisión, etc." required/><br/>
+
+    <button type="submit" th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
+    <a th:href="@{/propiedad-contrato/all}">Cancelar</a>
+</form>
+</body>
+</html>

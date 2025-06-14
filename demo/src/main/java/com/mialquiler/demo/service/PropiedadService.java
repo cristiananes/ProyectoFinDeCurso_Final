@@ -26,9 +26,16 @@ public class PropiedadService {
         return propiedadRepository.findById(id);
     }
 
+    // NUEVO: Método actualizar
+    public void actualizar(Propiedad propiedad) {
+        if (propiedadRepository.existsById(propiedad.getId())) {
+            propiedadRepository.save(propiedad);
+        } else {
+            throw new RuntimeException("Propiedad no encontrada con ID: " + propiedad.getId());
+        }
+    }
+
     public void eliminar(Long id) {
         propiedadRepository.deleteById(id);
     }
-
-
 }

@@ -15,7 +15,7 @@
         <th>Fecha real</th>
         <th>Cantidad esperada</th>
         <th>Cantidad abonada</th>
-        <th>Retraso</th>
+        <th>Retraso (días)</th>
         <th>Estado</th>
         <th>Acciones</th>
     </tr>
@@ -25,14 +25,18 @@
         <td th:text="${pago.id}">1</td>
         <td th:text="${pago.contrato != null ? pago.contrato.id : 'N/A'}">Contrato</td>
         <td th:text="${pago.fechaPrevista}">2025-01-01</td>
-        <td th:text="${pago.fechaReal}">2025-01-02</td>
+        <td th:text="${pago.fechaReal != null ? pago.fechaReal : 'Pendiente'}">2025-01-02</td>
         <td th:text="${pago.cantidadEsperada}">500</td>
         <td th:text="${pago.cantidadAbonada}">500</td>
         <td th:text="${pago.retraso}">0</td>
-        <td th:text="${pago.estado ? 'Pagado' : 'Pendiente'}">Estado</td>
         <td>
-            <a th:href="@{'/pagos/editar/' + ${pago.id}}" class="btn btn-primary btn-sm">Editar</a>
-            <a th:href="@{'/pagos/eliminar/' + ${pago.id}}">Eliminar</a>
+            <span th:if="${pago.estado}" class="badge badge-success">Pagado</span>
+            <span th:if="${!pago.estado}" class="badge badge-danger">Pendiente</span>
+        </td>
+        <td>
+            <a th:href="@{'/pagos/editar/' + ${pago.id}}">Editar</a> |
+            <a th:href="@{'/pagos/eliminar/' + ${pago.id}}"
+               onclick="return confirm('¿Está seguro de eliminar este pago?')">Eliminar</a>
         </td>
     </tr>
     </tbody>

@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Formulario de propiedad</title>
+  <title th:text="${esEdicion} ? 'Editar propiedad' : 'Crear nueva propiedad'">Formulario de propiedad</title>
 </head>
 <body>
-<h1>Crear nueva propiedad</h1>
-<form th:action="@{/propiedades/crear}" th:object="${propiedad}" method="post">
+<h1 th:text="${esEdicion} ? 'Editar propiedad' : 'Crear nueva propiedad'">Formulario de propiedad</h1>
+<form th:action="${esEdicion} ? @{'/propiedades/actualizar/' + ${propiedad.id}} : @{/propiedades/crear}"
+      th:object="${propiedad}" method="post">
+
   <label>Dirección:</label>
-  <input type="text" th:field="*{direccion}" /><br/>
+  <input type="text" th:field="*{direccion}" required/><br/>
 
   <label>Descripción:</label>
-  <input type="text" th:field="*{descripcion}" /><br/>
+  <textarea th:field="*{descripcion}" rows="3" cols="50"></textarea><br/>
 
   <label>Precio:</label>
-  <input type="number" th:field="*{precio}" /><br/>
+  <input type="number" th:field="*{precio}" required/><br/>
 
   <label>Estado:</label>
-  <input type="text" th:field="*{estado}" /><br/>
+  <select th:field="*{estado}" required>
+    <option value="DISPONIBLE">Disponible</option>
+    <option value="OCUPADA">Ocupada</option>
+    <option value="MANTENIMIENTO">En mantenimiento</option>
+  </select><br/>
 
   <label>Dueño:</label>
-  <select th:field="*{duenio}">
+  <select th:field="*{duenio}" required>
     <option th:each="usuario : ${usuarios}"
-            th:value="${usuario}"
-            th:text="${usuario.username}">
+            th:value="${usuario.username}"
+            th:text="${usuario.username + ' - ' + usuario.nombre}">
     </option>
   </select><br/>
 
-  <button type="submit">Guardar</button>
+  <button type="submit" th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
+  <a th:href="@{/propiedades/all}">Cancelar</a>
 </form>
 </body>
 </html>

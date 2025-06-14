@@ -29,6 +29,15 @@ public class ContratoService {
         return contratoRepository.findById(id);
     }
 
+    // NUEVO: Método actualizar
+    public void actualizar(Contrato contrato) {
+        if (contratoRepository.existsById(contrato.getId())) {
+            contratoRepository.save(contrato);
+        } else {
+            throw new RuntimeException("Contrato no encontrado con ID: " + contrato.getId());
+        }
+    }
+
     public void eliminar(Long id) {
         contratoRepository.deleteById(id);
     }

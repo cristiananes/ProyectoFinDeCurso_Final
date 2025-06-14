@@ -39,10 +39,29 @@ public class ContratoController {
         return new ModelAndView("redirect:/contratos/all");
     }
 
+    // NUEVO: Mostrar formulario de edición
+    @GetMapping("/editar/{id}")
+    public ModelAndView mostrarFormularioEdicion(@PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("contratos/contratoForm");
+        Contrato contrato = contratoService.buscarPorId(id)
+                .orElseThrow(() -> new RuntimeException("Contrato no encontrado"));
+        mav.addObject("contrato", contrato);
+        mav.addObject("usuarios", userRepository.findAll());
+        mav.addObject("esEdicion", true);
+        return mav;
+    }
+
+    // NUEVO: Actualizar contrato
+    @PostMapping("/actualizar/{id}")
+    public ModelAndView actualizar(@PathVariable Long id, @ModelAttribute Contrato contrato) {
+        contrato.setId(id);
+        contratoService.actualizar(contrato);
+        return new ModelAndView("redirect:/contratos/all");
+    }
+
     @GetMapping("/eliminar/{id}")
     public ModelAndView eliminar(@PathVariable Long id) {
         contratoService.eliminar(id);
         return new ModelAndView("redirect:/contratos/all");
     }
 }
-

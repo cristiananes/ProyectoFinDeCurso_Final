@@ -14,9 +14,11 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
+
     @Autowired
     UserService userService;
 
+    // Obtener lista de todos los usuarios
     @GetMapping("/all")
     public ModelAndView obtenerListaUsuarios(){
         ModelAndView salida = new ModelAndView("users/users");
@@ -24,14 +26,16 @@ public class UserController {
         return salida;
     }
 
+    // Ruta que te lleva al formulario de crear un usuario
     @GetMapping("/crear")
     public ModelAndView crearUsuario(){
         ModelAndView salida = new ModelAndView("users/usersForm");
         salida.addObject("usuario", new Usuario());
-        salida.addObject("isEdit", false);
+        salida.addObject("esEdicion", false);
         return salida;
     }
 
+    // Guardar un nuevo usuario
     @PostMapping("/create")
     public ModelAndView guardarUsuario(@ModelAttribute Usuario usuario){
         Boolean guardado = userService.validarUsername(usuario);
@@ -41,40 +45,38 @@ public class UserController {
             salida.addObject("users", userRepository.findAll());
             salida.addObject("mensaje", "Usuario guardado correctamente");
             return salida;
-        }else {
+        } else {
             ModelAndView salida = new ModelAndView("users/usersForm");
             salida.addObject("usuario", new Usuario());
-            salida.addObject("isEdit", false);
-            salida.addObject("mensaje", "Nombre de usuario existente utiliza otro");
+            salida.addObject("mensaje", "Nombre de usuario existente, utiliza otro");
             return salida;
         }
     }
 
     // NUEVO: Mostrar formulario de edición
     @GetMapping("/editar/{username}")
-    public ModelAndView editarUsuario(@PathVariable String username) {
+    public ModelAndView mostrarFormularioEdicion(@PathVariable String username) {
         ModelAndView mav = new ModelAndView("users/usersForm");
-        Usuario usuario = userRepository.findById(username).orElse(new Usuario());
+        Usuario usuario = userRepository.findById(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         mav.addObject("usuario", usuario);
-        mav.addObject("isEdit", true);
+        mav.addObject("esEdicion", true);
         return mav;
     }
 
     // NUEVO: Actualizar usuario
-    @PostMapping("/update")
-    public ModelAndView actualizarUsuario(@ModelAttribute Usuario usuario) {
-        userRepository.save(usuario);
-        ModelAndView mav = new ModelAndView("users/users");
-        mav.addObject("users", userRepository.findAll());
-        mav.addObject("mensaje", "Usuario actualizado correctamente");
+    @PostMapping("/actualizar/{username}")
+    public ModelAndView actualizar(@PathVariable String username, @ModelAttribute Usuario usuario) {
+        usuario.setUsername(username);
+        userService.actualizar(usuario);
+        ModelAndView mav = new ModelAndView("redirect:/users/all");
         return mav;
     }
 
     // NUEVO: Eliminar usuario
     @GetMapping("/eliminar/{username}")
-    public ModelAndView eliminarUsuario(@PathVariable String username) {
-        userRepository.deleteById(username);
-        ModelAndView mav = new ModelAndView("redirect:/users/all");
-        return mav;
+    public ModelAndView eliminar(@PathVariable String username) {
+        userService.eliminar(username);
+        return new ModelAndView("redirect:/users/all");
     }
 }

@@ -14,20 +14,22 @@
     <th>Fecha Inicio</th>
     <th>Fecha Fin</th>
     <th>Precio</th>
+    <th>Estado</th>
     <th>Acciones</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="contrato : ${contratos}">
     <td th:text="${contrato.id}"></td>
-    <td th:text="${contrato.inquilino.username}"></td>
+    <td th:text="${contrato.inquilino?.username}"></td>
     <td th:text="${contrato.fechaInicio}"></td>
     <td th:text="${contrato.fechaFin}"></td>
     <td th:text="${contrato.precio}"></td>
+    <td th:text="${contrato.estado} ? 'Activo' : 'Inactivo'"></td>
     <td>
-      <a th:href="@{'/contratos/editar/' + ${contrato.id}}" class="btn btn-primary btn-sm">Editar</a>
-      <a th:href="@{'/contratos/eliminar/' + ${contrato.id}}">Eliminar</a>
-
+      <a th:href="@{'/contratos/editar/' + ${contrato.id}}">Editar</a> |
+      <a th:href="@{'/contratos/eliminar/' + ${contrato.id}}"
+         onclick="return confirm('¿Está seguro de eliminar este contrato?')">Eliminar</a>
     </td>
   </tr>
   </tbody>

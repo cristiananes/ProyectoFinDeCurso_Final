@@ -30,6 +30,7 @@ public class PagoController {
         ModelAndView mav = new ModelAndView("pagos/pagoForm");
         mav.addObject("pago", new Pago());
         mav.addObject("contratos", contratoRepository.findAll());
+        mav.addObject("esEdicion", false);
         return mav;
     }
 
@@ -39,10 +40,29 @@ public class PagoController {
         return new ModelAndView("redirect:/pagos/all");
     }
 
+    // NUEVO: Mostrar formulario de edición
+    @GetMapping("/editar/{id}")
+    public ModelAndView mostrarFormularioEdicion(@PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("pagos/pagoForm");
+        Pago pago = pagoService.buscarPorId(id)
+                .orElseThrow(() -> new RuntimeException("Pago no encontrado"));
+        mav.addObject("pago", pago);
+        mav.addObject("contratos", contratoRepository.findAll());
+        mav.addObject("esEdicion", true);
+        return mav;
+    }
+
+    // NUEVO: Actualizar pago
+    @PostMapping("/actualizar/{id}")
+    public ModelAndView actualizar(@PathVariable Long id, @ModelAttribute Pago pago) {
+        pago.setId(id);
+        pagoService.actualizar(pago);
+        return new ModelAndView("redirect:/pagos/all");
+    }
+
     @GetMapping("/eliminar/{id}")
     public ModelAndView eliminar(@PathVariable Long id) {
         pagoService.eliminar(id);
         return new ModelAndView("redirect:/pagos/all");
     }
 }
-
