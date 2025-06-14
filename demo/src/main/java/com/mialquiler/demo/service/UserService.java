@@ -3,6 +3,7 @@ package com.mialquiler.demo.service;
 import com.mialquiler.demo.entity.Usuario;
 import com.mialquiler.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,6 +13,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     // Cambiar rol a propietario
     public Usuario cambiarRolToPropietario(Usuario usuario){
@@ -30,7 +34,9 @@ public class UserService {
     // Validar username único
     public Boolean validarUsername(Usuario usuario){
         Optional<Usuario> user = userRepository.findById(usuario.getUsername());
-        if (user.isEmpty()){
+        if (user.isEmpty()) {
+            String hashed = passwordEncoder.encode(usuario.getContrasenia());
+            usuario.setContrasenia(hashed);
             userRepository.save(usuario);
             return true;
         } else {
@@ -45,6 +51,9 @@ public class UserService {
             if (usuario.getContrasenia() == null || usuario.getContrasenia().isEmpty()) {
                 Usuario usuarioExistente = userRepository.findById(usuario.getUsername()).get();
                 usuario.setContrasenia(usuarioExistente.getContrasenia());
+            } else {
+                String hashed = passwordEncoder.encode(usuario.getContrasenia());
+                usuario.setContrasenia(hashed);
             }
             userRepository.save(usuario);
         } else {
