@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Asignaciones Propiedad-Contrato</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base('Asignaciones Propiedad-Contrato', ~{::body})">
 <body>
 <h1>Asignaciones de Propiedades a Contratos</h1>
 <a th:href="@{/propiedad-contrato/crear}">Nueva Asignación</a>

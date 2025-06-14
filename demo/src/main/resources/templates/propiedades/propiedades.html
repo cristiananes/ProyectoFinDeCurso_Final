@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<head>
-    <title>Lista de propiedades</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      th:replace="layout :: base('Lista de propiedades', ~{::body})">
 <body>
-<h1>Propiedades registradas</h1>
+    <h1>Propiedades registradas</h1>
 <a th:href="@{/propiedades/crear}" sec:authorize="hasRole('ADMIN')">Añadir nueva propiedad</a>
 <table border="1">
     <thead>

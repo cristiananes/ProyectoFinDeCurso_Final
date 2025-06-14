@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title th:text="${esEdicion} ? 'Editar propiedad' : 'Crear nueva propiedad'">Formulario de propiedad</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base(${esEdicion} ? 'Editar propiedad' : 'Crear nueva propiedad', ~{::body})">
 <body>
 <h1 th:text="${esEdicion} ? 'Editar propiedad' : 'Crear nueva propiedad'">Formulario de propiedad</h1>
 <form th:action="${esEdicion} ? @{'/propiedades/actualizar/' + ${propiedad.id}} : @{/propiedades/crear}"
