@@ -7,11 +7,13 @@ import com.mialquiler.demo.repository.PropiedadRepository;
 import com.mialquiler.demo.service.PropiedadContratoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/propiedad-contrato")
+@PreAuthorize("hasRole('ADMIN')")
 public class PropiedadContratoController {
 
     @Autowired

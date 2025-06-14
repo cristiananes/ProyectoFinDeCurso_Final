@@ -5,11 +5,13 @@ import com.mialquiler.demo.repository.ContratoRepository;
 import com.mialquiler.demo.service.PagoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/pagos")
+@PreAuthorize("hasRole('ADMIN')")
 public class PagoController {
 
     @Autowired
