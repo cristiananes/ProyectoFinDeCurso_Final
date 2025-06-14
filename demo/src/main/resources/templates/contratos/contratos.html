@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base('Lista de contratos', ~{::body})">
 <body>
-  <h1>Contratos registrados</h1>
-<a th:href="@{/contratos/crear}">Añadir nuevo contrato</a>
-<table border="1">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Inquilino</th>
-    <th>Fecha Inicio</th>
-    <th>Fecha Fin</th>
-    <th>Precio</th>
-    <th>Estado</th>
-    <th>Acciones</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="contrato : ${contratos}">
-    <td th:text="${contrato.id}"></td>
-    <td th:text="${contrato.inquilino?.username}"></td>
-    <td th:text="${contrato.fechaInicio}"></td>
-    <td th:text="${contrato.fechaFin}"></td>
-    <td th:text="${contrato.precio}"></td>
-    <td th:text="${contrato.estado} ? 'Activo' : 'Inactivo'"></td>
-    <td>
-      <a th:href="@{'/contratos/editar/' + ${contrato.id}}">Editar</a> |
-      <a th:href="@{'/contratos/eliminar/' + ${contrato.id}}"
-         onclick="return confirm('¿Está seguro de eliminar este contrato?')">Eliminar</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Contratos registrados</h1>
+    <div class="mb-3 text-right">
+        <a th:href="@{/contratos/crear}" class="btn btn-success">Añadir nuevo contrato</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Inquilino</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="contrato : ${contratos}">
+                <td th:text="${contrato.id}"></td>
+                <td th:text="${contrato.inquilino?.username}"></td>
+                <td th:text="${contrato.fechaInicio}"></td>
+                <td th:text="${contrato.fechaFin}"></td>
+                <td th:text="${contrato.precio}"></td>
+                <td th:text="${contrato.estado} ? 'Activo' : 'Inactivo'"></td>
+                <td>
+                    <a th:href="@{'/contratos/editar/' + ${contrato.id}}" class="btn btn-primary btn-sm">Editar</a>
+                    <a th:href="@{'/contratos/eliminar/' + ${contrato.id}}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('¿Está seguro de eliminar este contrato?')">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base(${esEdicion} ? 'Editar propiedad' : 'Crear nueva propiedad', ~{::body})">
 <body>
-<h1 th:text="${esEdicion} ? 'Editar propiedad' : 'Crear nueva propiedad'">Formulario de propiedad</h1>
-<form th:action="${esEdicion} ? @{'/propiedades/actualizar/' + ${propiedad.id}} : @{/propiedades/crear}"
-      th:object="${propiedad}" method="post">
-
-  <label>Dirección:</label>
-  <input type="text" th:field="*{direccion}" required/><br/>
-
-  <label>Descripción:</label>
-  <textarea th:field="*{descripcion}" rows="3" cols="50"></textarea><br/>
-
-  <label>Precio:</label>
-  <input type="number" th:field="*{precio}" required/><br/>
-
-  <label>Estado:</label>
-  <select th:field="*{estado}" required>
-    <option value="DISPONIBLE">Disponible</option>
-    <option value="OCUPADA">Ocupada</option>
-    <option value="MANTENIMIENTO">En mantenimiento</option>
-  </select><br/>
-
-  <label>Dueño:</label>
-  <select th:field="*{duenio}" required>
-    <option th:each="usuario : ${usuarios}"
-            th:value="${usuario.username}"
-            th:text="${usuario.username + ' - ' + usuario.nombre}">
-    </option>
-  </select><br/>
-
-  <button type="submit" th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
-  <a th:href="@{/propiedades/all}">Cancelar</a>
-</form>
+<div class="container mt-5">
+    <h1 class="text-center mb-4" th:text="${esEdicion} ? 'Editar propiedad' : 'Crear nueva propiedad'">Formulario de propiedad</h1>
+    <form th:action="${esEdicion} ? @{'/propiedades/actualizar/' + ${propiedad.id}} : @{/propiedades/crear}"
+          th:object="${propiedad}" method="post">
+        <div class="form-group">
+            <label>Dirección:</label>
+            <input type="text" th:field="*{direccion}" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Descripción:</label>
+            <textarea th:field="*{descripcion}" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Precio:</label>
+            <input type="number" th:field="*{precio}" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Estado:</label>
+            <select th:field="*{estado}" class="form-control" required>
+                <option value="DISPONIBLE">Disponible</option>
+                <option value="OCUPADA">Ocupada</option>
+                <option value="MANTENIMIENTO">En mantenimiento</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Dueño:</label>
+            <select th:field="*{duenio}" class="form-control" required>
+                <option th:each="usuario : ${usuarios}"
+                        th:value="${usuario.username}"
+                        th:text="${usuario.username + ' - ' + usuario.nombre}">
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
+        <a th:href="@{/propiedades/all}" class="btn btn-secondary mt-3">Cancelar</a>
+    </form>
+</div>
 </body>
 </html>
