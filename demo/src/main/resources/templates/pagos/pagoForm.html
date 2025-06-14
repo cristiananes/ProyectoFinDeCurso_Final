@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base(${esEdicion} ? 'Editar pago' : 'Registrar nuevo pago', ~{::body})">
 <body>
-<h1 th:text="${esEdicion} ? 'Editar pago' : 'Registrar nuevo pago'">Formulario de pago</h1>
-<form th:action="${esEdicion} ? @{'/pagos/actualizar/' + ${pago.id}} : @{/pagos/crear}"
-      th:object="${pago}" method="post">
-
-    <label>Contrato:</label>
-    <select th:field="*{contrato}" th:disabled="${esEdicion}" required>
-        <option value="">Seleccione un contrato</option>
-        <option th:each="contrato : ${contratos}"
-                th:value="${contrato.id}"
-                th:text="'Contrato #' + ${contrato.id} + ' - ' + ${contrato.inquilino?.username}"
-                th:selected="${pago.contrato != null && pago.contrato.id == contrato.id}">
-        </option>
-    </select><br/>
-
-    <label>Fecha prevista:</label>
-    <input type="date" th:field="*{fechaPrevista}" required/><br/>
-
-    <label>Fecha real:</label>
-    <input type="date" th:field="*{fechaReal}"/><br/>
-
-    <label>Cantidad esperada:</label>
-    <input type="number" th:field="*{cantidadEsperada}" required/><br/>
-
-    <label>Cantidad abonada:</label>
-    <input type="number" th:field="*{cantidadAbonada}"/><br/>
-
-    <label>Estado:</label>
-    <select th:field="*{estado}">
-        <option th:value="true">Pagado</option>
-        <option th:value="false">Pendiente</option>
-    </select><br/>
-
-    <button type="submit" th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
-    <a th:href="@{/pagos/all}">Cancelar</a>
-</form>
+<div class="container mt-5">
+    <h1 class="text-center mb-4" th:text="${esEdicion} ? 'Editar pago' : 'Registrar nuevo pago'">Formulario de pago</h1>
+    <form th:action="${esEdicion} ? @{'/pagos/actualizar/' + ${pago.id}} : @{/pagos/crear}"
+          th:object="${pago}" method="post">
+        <div class="form-group">
+            <label>Contrato:</label>
+            <select th:field="*{contrato}" class="form-control" th:disabled="${esEdicion}" required>
+                <option value="">Seleccione un contrato</option>
+                <option th:each="contrato : ${contratos}"
+                        th:value="${contrato.id}"
+                        th:text="'Contrato #' + ${contrato.id} + ' - ' + ${contrato.inquilino?.username}"
+                        th:selected="${pago.contrato != null && pago.contrato.id == contrato.id}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Fecha prevista:</label>
+            <input type="date" th:field="*{fechaPrevista}" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Fecha real:</label>
+            <input type="date" th:field="*{fechaReal}" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Cantidad esperada:</label>
+            <input type="number" th:field="*{cantidadEsperada}" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Cantidad abonada:</label>
+            <input type="number" th:field="*{cantidadAbonada}" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Estado:</label>
+            <select th:field="*{estado}" class="form-control">
+                <option th:value="true">Pagado</option>
+                <option th:value="false">Pendiente</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" th:text="${esEdicion} ? 'Actualizar' : 'Guardar'">Guardar</button>
+        <a th:href="@{/pagos/all}" class="btn btn-secondary mt-3">Cancelar</a>
+    </form>
+</div>
 </body>
 </html>
