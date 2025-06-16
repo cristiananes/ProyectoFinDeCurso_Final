@@ -72,6 +72,16 @@ class EstadisticasServiceTest {
     }
 
     @Test
+    void calcularIngresosMensuales_cuandoEsNull_deberiaRetornarCero() {
+        when(contratoRepository.sumPrecioByEstadoTrue()).thenReturn(null);
+
+        Double total = estadisticasService.calcularIngresosMensuales();
+
+        assertEquals(0.0, total);
+        verify(contratoRepository).sumPrecioByEstadoTrue();
+    }
+
+    @Test
     void contarContratosPorAnio_deberiaConsultarRepositorio() {
         when(contratoRepository.countByFechaInicioBetween(any(LocalDate.class), any(LocalDate.class))).thenReturn(5L);
 
