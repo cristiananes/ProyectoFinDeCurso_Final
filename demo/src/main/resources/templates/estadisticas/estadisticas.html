@@ -10,33 +10,33 @@
     <div class="row mb-4">
         <div class="col-md-3">
             <div class="card border-left-primary">
-                <div class="card-body">
-                    <h5>Total Usuarios</h5>
-                    <h2 th:text="${totalUsuarios}">0</h2>
+                <div class="card-body text-center">
+                    <h5>Propiedades Disponibles</h5>
+                    <h2 th:text="${propiedadesDisponibles != null ? propiedadesDisponibles : 0}">0</h2>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card border-left-success">
-                <div class="card-body">
-                    <h5>Total Propiedades</h5>
-                    <h2 th:text="${totalPropiedades}">0</h2>
+                <div class="card-body text-center">
+                    <h5>Propiedades Ocupadas</h5>
+                    <h2 th:text="${propiedadesOcupadas != null ? propiedadesOcupadas : 0}">0</h2>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card border-left-info">
-                <div class="card-body">
-                    <h5>Propiedades Disponibles</h5>
-                    <h2 th:text="${propiedadesDisponibles}">0</h2>
+                <div class="card-body text-center">
+                    <h5>Contratos por Vencer (30 días)</h5>
+                    <h2 th:text="${contratosPorVencer30Dias != null ? contratosPorVencer30Dias : 0}">0</h2>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card border-left-warning">
-                <div class="card-body">
-                    <h5>Pagos Atrasados</h5>
-                    <h2 th:text="${pagosAtrasados}">0</h2>
+                <div class="card-body text-center">
+                    <h5>Ingresos Mensuales (€)</h5>
+                    <h2 th:text="${totalIngresosMensuales != null ? totalIngresosMensuales : 0}">0</h2>
                 </div>
             </div>
         </div>
@@ -44,44 +44,48 @@
 
     <!-- Estadísticas personalizables -->
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <div class="card">
                 <div class="card-header">
-                    <h5>Contratos por Vencer (Personalizable)</h5>
+                    <h5>Contratos por Año</h5>
                 </div>
                 <div class="card-body">
                     <form method="get">
                         <div class="form-group">
-                            <label>Días hasta vencimiento:</label>
-                            <input type="number" name="dias" th:value="${diasParam}" class="form-control" min="1" max="365">
+                            <label>Año:</label>
+                            <input type="number" name="anio" th:value="${anioConsultado}" class="form-control" min="1900" max="2100">
                         </div>
-                        <input type="hidden" name="precioMinimo" th:value="${precioParam}">
+                        <input type="hidden" name="montoMinimo" th:value="${montoConsultado}">
                         <button type="submit" class="btn btn-primary">Consultar</button>
                     </form>
                     <hr>
-                    <h3 th:text="${contratosPorVencer}">0</h3>
-                    <p>contratos vencen en <span th:text="${diasParam}">30</span> días</p>
+                    <div th:if="${contratosPorAnio != null}">
+                        <h3 th:text="${contratosPorAnio}">0</h3>
+                        <p>contratos en el año <span th:text="${anioConsultado}">0</span></p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <div class="card">
                 <div class="card-header">
-                    <h5>Propiedades por Precio (Personalizable)</h5>
+                    <h5>Pagos superiores a un monto</h5>
                 </div>
                 <div class="card-body">
                     <form method="get">
                         <div class="form-group">
-                            <label>Precio mínimo (€):</label>
-                            <input type="number" name="precioMinimo" th:value="${precioParam}" class="form-control" min="0">
+                            <label>Monto mínimo (€):</label>
+                            <input type="number" name="montoMinimo" th:value="${montoConsultado}" class="form-control" min="0">
                         </div>
-                        <input type="hidden" name="dias" th:value="${diasParam}">
+                        <input type="hidden" name="anio" th:value="${anioConsultado}">
                         <button type="submit" class="btn btn-primary">Consultar</button>
                     </form>
                     <hr>
-                    <h3 th:text="${propiedadesCaras}">0</h3>
-                    <p>propiedades con precio mayor a <span th:text="${precioParam}">500</span>€</p>
+                    <div th:if="${pagosSuperioresA != null}">
+                        <h3 th:text="${pagosSuperioresA}">0</h3>
+                        <p>pagos superiores a <span th:text="${montoConsultado}">0</span>€</p>
+                    </div>
                 </div>
             </div>
         </div>
