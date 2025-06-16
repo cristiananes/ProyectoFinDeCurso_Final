@@ -42,7 +42,8 @@ public class EstadisticasService {
     }
     // 4. Calcular ingresos mensuales totales
     public Double calcularIngresosMensuales() {
-        return contratoRepository.sumPrecioByEstadoTrue();
+        Double total = contratoRepository.sumPrecioByEstadoTrue();
+        return total != null ? total : 0.0;
     }
 
     // 5. PERSONALIZABLE: Contar contratos por año
