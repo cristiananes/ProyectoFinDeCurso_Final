@@ -12,7 +12,7 @@
             <div class="card border-left-primary">
                 <div class="card-body text-center">
                     <h5>Propiedades Disponibles</h5>
-                    <h2 th:text="${propiedadesDisponibles}">0</h2>
+                    <h2 th:text="${propiedadesDisponibles != null ? propiedadesDisponibles : 0}">0</h2>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
             <div class="card border-left-success">
                 <div class="card-body text-center">
                     <h5>Propiedades Ocupadas</h5>
-                    <h2 th:text="${propiedadesOcupadas}">0</h2>
+                    <h2 th:text="${propiedadesOcupadas != null ? propiedadesOcupadas : 0}">0</h2>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="card border-left-info">
                 <div class="card-body text-center">
                     <h5>Contratos por Vencer (30 días)</h5>
-                    <h2 th:text="${contratosPorVencer30Dias}">0</h2>
+                    <h2 th:text="${contratosPorVencer30Dias != null ? contratosPorVencer30Dias : 0}">0</h2>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
             <div class="card border-left-warning">
                 <div class="card-body text-center">
                     <h5>Ingresos Mensuales (€)</h5>
-                    <h2 th:text="${totalIngresosMensuales}">0</h2>
+                    <h2 th:text="${totalIngresosMensuales != null ? totalIngresosMensuales : 0}">0</h2>
                 </div>
             </div>
         </div>
