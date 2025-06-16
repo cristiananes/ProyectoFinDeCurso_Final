@@ -70,18 +70,16 @@ class PropiedadServiceTest {
     }
 
     @Test
-    void testGet_WhenPropiedadNotExists_ShouldThrowException() {
+    void testGet_WhenPropiedadNotExists_ShouldReturnEmptyOptional() {
         // --- ARRANGE ---
         // Se simula que el repositorio NO encuentra la propiedad
         when(propiedadRepository.findById(99L)).thenReturn(Optional.empty());
 
-        // --- ACT & ASSERT ---
-        // Se comprueba que tu método get() lanza una excepción cuando no encuentra
-        // la propiedad, porque internamente está usando .get() sobre un Optional vacío.
-        // Esto es correcto y demuestra que el test funciona.
-        assertThrows(NoSuchElementException.class, () -> {
-            propiedadService.buscarPorId(99L);
-        });
+        // --- ACT ---
+        Optional<Propiedad> resultado = propiedadService.buscarPorId(99L);
+
+        // --- ASSERT ---
+        assertTrue(resultado.isEmpty());
         verify(propiedadRepository).findById(99L);
     }
 
@@ -96,6 +94,22 @@ class PropiedadServiceTest {
         // --- ASSERT ---
         // Se verifica que el método save() del repositorio fue llamado con el objeto propiedad1
         verify(propiedadRepository).save(propiedad1);
+    }
+
+    @Test
+    void testActualizar_CuandoExiste_DeberiaGuardar() {
+        when(propiedadRepository.existsById(propiedad1.getId())).thenReturn(true);
+
+        propiedadService.actualizar(propiedad1);
+
+        verify(propiedadRepository).save(propiedad1);
+    }
+
+    @Test
+    void testActualizar_CuandoNoExiste_DeberiaLanzarExcepcion() {
+        when(propiedadRepository.existsById(propiedad1.getId())).thenReturn(false);
+
+        assertThrows(RuntimeException.class, () -> propiedadService.actualizar(propiedad1));
     }
 
     @Test
