@@ -38,7 +38,7 @@ class PropiedadRepositoryTest {
         p2.setDuenio(u);
         propiedadRepository.save(p2);
 
-        long total = propiedadRepository.countByEstado("DISPONIBLE");
+        long total = propiedadRepository.countByEstadoIgnoreCase("DISPONIBLE");
         assertEquals(1L, total);
     }
 
