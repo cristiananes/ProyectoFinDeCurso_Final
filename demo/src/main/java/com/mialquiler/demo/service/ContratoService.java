@@ -45,4 +45,7 @@ public class ContratoService {
     public List<Contrato> contratosPorVencer() {
         return notificacionesService.getContratosPorVencer();
     }
+    public List<Contrato> listarContratosPorUsuario(String username) {
+        return contratoRepository.findByInquilino_Username(username);
+    }
 }

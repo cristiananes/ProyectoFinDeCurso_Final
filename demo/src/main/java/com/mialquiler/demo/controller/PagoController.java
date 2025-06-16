@@ -4,14 +4,15 @@ import com.mialquiler.demo.entity.Pago;
 import com.mialquiler.demo.repository.ContratoRepository;
 import com.mialquiler.demo.service.PagoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/pagos")
-@PreAuthorize("hasRole('ADMIN')")
+// 1. PERMISO GENERAL: Cualquier usuario autenticado puede acceder.
+@PreAuthorize("isAuthenticated()")
 public class PagoController {
 
     @Autowired
@@ -23,11 +24,14 @@ public class PagoController {
     @GetMapping("/all")
     public ModelAndView listarPagos() {
         ModelAndView mav = new ModelAndView("pagos/pagos");
+        // NOTA: Recuerda que aquí también necesitarás filtrar los pagos por usuario.
         mav.addObject("pagos", pagoService.listarTodos());
         return mav;
     }
 
+    // 2. PERMISOS ESPECÍFICOS: Solo el ADMIN puede gestionar los pagos.
     @GetMapping("/crear")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView mostrarFormulario() {
         ModelAndView mav = new ModelAndView("pagos/pagoForm");
         mav.addObject("pago", new Pago());
@@ -37,13 +41,14 @@ public class PagoController {
     }
 
     @PostMapping("/crear")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView guardar(@ModelAttribute Pago pago) {
         pagoService.guardar(pago);
         return new ModelAndView("redirect:/pagos/all");
     }
 
-    // NUEVO: Mostrar formulario de edición
     @GetMapping("/editar/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView mostrarFormularioEdicion(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("pagos/pagoForm");
         Pago pago = pagoService.buscarPorId(id)
@@ -54,8 +59,8 @@ public class PagoController {
         return mav;
     }
 
-    // NUEVO: Actualizar pago
     @PostMapping("/actualizar/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView actualizar(@PathVariable Long id, @ModelAttribute Pago pago) {
         pago.setId(id);
         pagoService.actualizar(pago);
@@ -63,6 +68,7 @@ public class PagoController {
     }
 
     @GetMapping("/eliminar/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView eliminar(@PathVariable Long id) {
         pagoService.eliminar(id);
         return new ModelAndView("redirect:/pagos/all");

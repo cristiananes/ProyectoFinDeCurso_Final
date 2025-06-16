@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/propiedades")
-@PreAuthorize("hasRole('ADMIN')")
 public class PropiedadController {
 
     @Autowired
@@ -29,6 +28,7 @@ public class PropiedadController {
     }
 
     // Mostrar formulario para crear propiedad
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/crear")
     public ModelAndView mostrarFormulario() {
         ModelAndView mav = new ModelAndView("propiedades/propiedadForm");

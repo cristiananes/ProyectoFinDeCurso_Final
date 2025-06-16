@@ -28,10 +28,10 @@ public class Contrato {
 	@JoinColumn(name = "inquilino_username")
 	private Usuario inquilino;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contrato_propiedad")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contrato_propiedad", cascade = CascadeType.ALL)
 	private List<PropiedadContrato> propiedadContratos;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contrato")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contrato",cascade = CascadeType.ALL)
 	@ToString.Exclude
 	private List<Pago> pagos;
 
