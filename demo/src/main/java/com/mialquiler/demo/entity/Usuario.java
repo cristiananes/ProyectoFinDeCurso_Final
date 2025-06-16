@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -29,5 +30,6 @@ public class Usuario {
     private Perfil perfil;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "duenio", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Propiedad> propiedades;
 }
