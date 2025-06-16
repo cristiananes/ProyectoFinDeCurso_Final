@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: base('Presentación - MiAlquiler', ~{::body})">
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4"><i class="fas fa-chalkboard-teacher"></i> Presentación del Proyecto</h1>
+    <img src="https://picsum.photos/seed/mialquiler/1200/300" class="img-fluid mb-4" alt="Imagen introductoria">
+    <p class="lead text-center">Resumen visual del proyecto y guion narrado de la defensa.</p>
+
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="h1">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#c1" aria-expanded="true" aria-controls="c1">
+                        Diapositiva 1 - Título del Proyecto
+                    </button>
+                </h2>
+            </div>
+            <div id="c1" class="collapse show" aria-labelledby="h1" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Título:</strong> "MiAlquiler – Plataforma Integral de Gestión de Alquileres"</li>
+                        <li><strong>Presentador:</strong> Cristian Anes García (Alumno DAW)</li>
+                        <li><strong>Notas:</strong> Saludo inicial y breve introducción.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h2">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c2" aria-expanded="false" aria-controls="c2">
+                        Diapositiva 2 - Introducción y Empresa
+                    </button>
+                </h2>
+            </div>
+            <div id="c2" class="collapse" aria-labelledby="h2" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Empresa PropTech tipo SaaS con modelo de suscripción.</li>
+                        <li>Necesidad: digitalizar gestión de alquileres.</li>
+                        <li>Diferenciación por enfoque local y facilidad de uso.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h3">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c3" aria-expanded="false" aria-controls="c3">
+                        Diapositiva 3 - Estructura Empresarial
+                    </button>
+                </h2>
+            </div>
+            <div id="c3" class="collapse" aria-labelledby="h3" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Organigrama de startup con áreas de Desarrollo, Diseño y Gestión.</li>
+                        <li>Funciones clave de cada área.</li>
+                        <li>Escalabilidad futura según crecimiento.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h4">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c4" aria-expanded="false" aria-controls="c4">
+                        Diapositiva 4 - Problema y Necesidad
+                    </button>
+                </h2>
+            </div>
+            <div id="c4" class="collapse" aria-labelledby="h4" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Alta demanda de pagos automatizados y contratos digitales.</li>
+                        <li>La gestión manual produce morosidad y poca transparencia.</li>
+                        <li>MiAlquiler cubre esta brecha con mayor eficiencia.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h5">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c5" aria-expanded="false" aria-controls="c5">
+                        Diapositiva 5 - Oportunidad y Viabilidad
+                    </button>
+                </h2>
+            </div>
+            <div id="c5" class="collapse" aria-labelledby="h5" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Mercado PropTech global ~€15.2B; en España ~€1.8B.</li>
+                        <li>Proyección: 50 clientes primer año, 2000 en 5 años.</li>
+                        <li>Financiación propia y posibles ayudas públicas.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h6">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c6" aria-expanded="false" aria-controls="c6">
+                        Diapositiva 6 - Solución Propuesta
+                    </button>
+                </h2>
+            </div>
+            <div id="c6" class="collapse" aria-labelledby="h6" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Plataforma web integral para propietarios, inquilinos y administradores.</li>
+                        <li>Automatiza pagos, contratos y comunicación directa.</li>
+                        <li>Dashboard con reportes en tiempo real.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h7">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c7" aria-expanded="false" aria-controls="c7">
+                        Diapositiva 7 - Arquitectura y Tecnologías
+                    </button>
+                </h2>
+            </div>
+            <div id="c7" class="collapse" aria-labelledby="h7" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Arquitectura MVC con Spring Boot.</li>
+                        <li>Frontend con Thymeleaf y Bootstrap.</li>
+                        <li>Base de datos MySQL normalizada.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h8">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c8" aria-expanded="false" aria-controls="c8">
+                        Diapositiva 8 - Desarrollo y Planificación
+                    </button>
+                </h2>
+            </div>
+            <div id="c8" class="collapse" aria-labelledby="h8" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Metodología iterativa por fases.</li>
+                        <li>Análisis, desarrollo backend, frontend y pruebas.</li>
+                        <li>Unas 12-13 semanas de trabajo efectivo.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h9">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c9" aria-expanded="false" aria-controls="c9">
+                        Diapositiva 9 - Despliegue y Pruebas
+                    </button>
+                </h2>
+            </div>
+            <div id="c9" class="collapse" aria-labelledby="h9" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Despliegue en entorno local con Spring Boot.</li>
+                        <li>Preparación para migrar a la nube.</li>
+                        <li>Pruebas funcionales y unitarias con usuarios reales.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h10">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c10" aria-expanded="false" aria-controls="c10">
+                        Diapositiva 10 - Documentación
+                    </button>
+                </h2>
+            </div>
+            <div id="c10" class="collapse" aria-labelledby="h10" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Diagramas UML y guía de usuario.</li>
+                        <li>Código en repositorio Git con control de versiones.</li>
+                        <li>Checklist de requisitos cumplidos.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h11">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c11" aria-expanded="false" aria-controls="c11">
+                        Diapositiva 11 - Viabilidad Técnica y Legal
+                    </button>
+                </h2>
+            </div>
+            <div id="c11" class="collapse" aria-labelledby="h11" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Stack tecnológico consolidado y costes asumibles.</li>
+                        <li>Cumplimiento de obligaciones fiscales y RGPD.</li>
+                        <li>Ayudas para emprendedores como ENISA.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h12">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c12" aria-expanded="false" aria-controls="c12">
+                        Diapositiva 12 - Evaluación y Calidad
+                    </button>
+                </h2>
+            </div>
+            <div id="c12" class="collapse" aria-labelledby="h12" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Hitos semanales de seguimiento.</li>
+                        <li>Indicadores de calidad y accesibilidad.</li>
+                        <li>Gestión de incidencias mediante Git.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="h13">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#c13" aria-expanded="false" aria-controls="c13">
+                        Diapositiva 13 - Conclusiones
+                    </button>
+                </h2>
+            </div>
+            <div id="c13" class="collapse" aria-labelledby="h13" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>MiAlquiler integra todo el ciclo de alquileres.</li>
+                        <li>Proyecto viable con opciones futuras (app móvil, microservicios).</li>
+                        <li>Agradecimientos al tribunal y turno de preguntas.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h2><i class="fas fa-book-open"></i> Guion Narrado</h2>
+        <p>Se expone de forma narrada el contexto empresarial, la problemática detectada y la solución técnica desarrollada. Cristian Anes García describe cómo MiAlquiler digitaliza la gestión de propiedades, contratos y pagos, y aborda aspectos de despliegue, pruebas y futuras mejoras.</p>
+    </div>
+</div>
+</body>
+</html>
