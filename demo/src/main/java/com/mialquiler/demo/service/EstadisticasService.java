@@ -26,12 +26,12 @@ public class EstadisticasService {
 
     // 1. Contar propiedades disponibles
     public long contarPropiedadesDisponibles() {
-        return propiedadRepository.countByEstado("DISPONIBLE");
+        return propiedadRepository.countByEstadoIgnoreCase("DISPONIBLE");
     }
 
     // 2. Contar propiedades ocupadas
     public long contarPropiedadesOcupadas() {
-        return propiedadRepository.countByEstado("OCUPADA");
+        return propiedadRepository.countByEstadoIgnoreCase("OCUPADA");
     }
 
     // 3. Contratos que vencen en los próximos 30 días
@@ -42,7 +42,8 @@ public class EstadisticasService {
     }
     // 4. Calcular ingresos mensuales totales
     public Double calcularIngresosMensuales() {
-        return contratoRepository.sumPrecioByEstadoTrue();
+        Double total = contratoRepository.sumPrecioByEstadoTrue();
+        return total != null ? total : 0.0;
     }
 
     // 5. PERSONALIZABLE: Contar contratos por año

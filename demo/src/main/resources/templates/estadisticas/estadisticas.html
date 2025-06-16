@@ -10,74 +10,36 @@
     <!-- Tarjetas de estadísticas -->
     <div class="row mb-4">
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Total Usuarios
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalUsuarios}">0</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-users fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
+        <div class="col-md-3">
+            <div class="card border-left-primary">
+                <div class="card-body text-center">
+                    <h5>Propiedades Disponibles</h5>
+                    <h2 th:text="${propiedadesDisponibles != null ? propiedadesDisponibles : 0}">0</h2>
                 </div>
             </div>
         </div>
-
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Total Propiedades
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalPropiedades}">0</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-building fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
+        <div class="col-md-3">
+            <div class="card border-left-success">
+                <div class="card-body text-center">
+                    <h5>Propiedades Ocupadas</h5>
+                    <h2 th:text="${propiedadesOcupadas != null ? propiedadesOcupadas : 0}">0</h2>
                 </div>
             </div>
         </div>
-
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Total Contratos
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalContratos}">0</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-file-contract fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
+        <div class="col-md-3">
+            <div class="card border-left-info">
+                <div class="card-body text-center">
+                    <h5>Contratos por Vencer (30 días)</h5>
+                    <h2 th:text="${contratosPorVencer30Dias != null ? contratosPorVencer30Dias : 0}">0</h2>
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="card border-left-warning">
+                <div class="card-body text-center">
+                    <h5>Ingresos Mensuales (€)</h5>
+                    <h2 th:text="${totalIngresosMensuales != null ? totalIngresosMensuales : 0}">0</h2>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Total Pagos
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${totalPagos}">0</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-credit-card fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
