@@ -29,6 +29,7 @@ public class Contrato {
 	private Usuario inquilino;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contrato_propiedad", cascade = CascadeType.ALL)
+	@ToString.Exclude
 	private List<PropiedadContrato> propiedadContratos;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contrato",cascade = CascadeType.ALL)
