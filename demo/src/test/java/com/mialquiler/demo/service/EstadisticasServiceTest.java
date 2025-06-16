@@ -33,22 +33,22 @@ class EstadisticasServiceTest {
 
     @Test
     void contarPropiedadesDisponibles_deberiaConsultarRepositorio() {
-        when(propiedadRepository.countByEstado("DISPONIBLE")).thenReturn(3L);
+        when(propiedadRepository.countByEstadoIgnoreCase("DISPONIBLE")).thenReturn(3L);
 
         long total = estadisticasService.contarPropiedadesDisponibles();
 
         assertEquals(3L, total);
-        verify(propiedadRepository).countByEstado("DISPONIBLE");
+        verify(propiedadRepository).countByEstadoIgnoreCase("DISPONIBLE");
     }
 
     @Test
     void contarPropiedadesOcupadas_deberiaConsultarRepositorio() {
-        when(propiedadRepository.countByEstado("OCUPADA")).thenReturn(2L);
+        when(propiedadRepository.countByEstadoIgnoreCase("OCUPADA")).thenReturn(2L);
 
         long total = estadisticasService.contarPropiedadesOcupadas();
 
         assertEquals(2L, total);
-        verify(propiedadRepository).countByEstado("OCUPADA");
+        verify(propiedadRepository).countByEstadoIgnoreCase("OCUPADA");
     }
 
     @Test

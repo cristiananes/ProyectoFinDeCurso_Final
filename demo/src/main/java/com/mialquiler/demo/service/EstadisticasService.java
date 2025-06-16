@@ -26,12 +26,12 @@ public class EstadisticasService {
 
     // 1. Contar propiedades disponibles
     public long contarPropiedadesDisponibles() {
-        return propiedadRepository.countByEstado("DISPONIBLE");
+        return propiedadRepository.countByEstadoIgnoreCase("DISPONIBLE");
     }
 
     // 2. Contar propiedades ocupadas
     public long contarPropiedadesOcupadas() {
-        return propiedadRepository.countByEstado("OCUPADA");
+        return propiedadRepository.countByEstadoIgnoreCase("OCUPADA");
     }
 
     // 3. Contratos que vencen en los próximos 30 días
