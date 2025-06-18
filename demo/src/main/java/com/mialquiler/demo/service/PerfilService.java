@@ -19,30 +19,22 @@ public class PerfilService {
     @Autowired
     private UserRepository userRepository;
 
-    /**
-     * Obtener todos los perfiles registrados
-     */
+    
     public List<Perfil> listarTodos() {
         return perfilRepository.findAll();
     }
 
-    /**
-     * Guardar un nuevo perfil
-     */
+    
     public void guardar(Perfil perfil) {
         perfilRepository.save(perfil);
     }
 
-    /**
-     * Buscar un perfil por su identificador
-     */
+    
     public Optional<Perfil> buscarPorId(Long id) {
         return perfilRepository.findById(id);
     }
 
-    /**
-     * Actualizar un perfil existente
-     */
+    
     public void actualizar(Perfil perfil) {
         if (perfil.getId() != null && perfilRepository.existsById(perfil.getId())) {
             perfilRepository.save(perfil);
@@ -51,16 +43,12 @@ public class PerfilService {
         }
     }
 
-    /**
-     * Eliminar un perfil por su ID
-     */
+    
     public void eliminar(Long id) {
         perfilRepository.deleteById(id);
     }
 
-    /**
-     * Asignar un perfil a un usuario y actualizar su rol
-     */
+    
     public Usuario asignarPerfilAUsuario(String username, Long perfilId) {
         Usuario usuario = userRepository.findById(username)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
@@ -76,6 +64,6 @@ public class PerfilService {
         return userRepository.save(usuario);
     }
 
-    //gestion de roles, perfiles y permisos.
+    
 
 }

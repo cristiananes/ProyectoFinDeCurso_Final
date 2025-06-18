@@ -26,7 +26,7 @@ public class PropiedadService {
         return propiedadRepository.findById(id);
     }
 
-    // NUEVO: Método actualizar
+    
     public void actualizar(Propiedad propiedad) {
         if (propiedadRepository.existsById(propiedad.getId())) {
             propiedadRepository.save(propiedad);

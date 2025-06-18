@@ -17,7 +17,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    // Inyectar el UserDetailsService personalizado
+    
     @Autowired
     private DatabaseUserDetailsService userDetailsService;
 
@@ -26,7 +26,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // Definir el bean del AuthenticationProvider
+    
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

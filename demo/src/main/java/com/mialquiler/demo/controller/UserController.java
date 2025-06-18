@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    // Obtener lista de todos los usuarios
+    
     @GetMapping("/all")
     public ModelAndView obtenerListaUsuarios(){
         ModelAndView salida = new ModelAndView("users/users");
@@ -28,7 +28,7 @@ public class UserController {
         return salida;
     }
 
-    // Ruta que te lleva al formulario de crear un usuario
+    
     @GetMapping("/crear")
     public ModelAndView crearUsuario(){
         ModelAndView salida = new ModelAndView("users/usersForm");
@@ -37,7 +37,7 @@ public class UserController {
         return salida;
     }
 
-    // Guardar un nuevo usuario
+    
     @PostMapping("/create")
     public ModelAndView guardarUsuario(@ModelAttribute Usuario usuario){
         Boolean guardado = userService.validarUsername(usuario);
@@ -55,7 +55,7 @@ public class UserController {
         }
     }
 
-    // NUEVO: Mostrar formulario de edición
+    
     @GetMapping("/editar/{username}")
     public ModelAndView mostrarFormularioEdicion(@PathVariable String username) {
         ModelAndView mav = new ModelAndView("users/usersForm");
@@ -66,7 +66,7 @@ public class UserController {
         return mav;
     }
 
-    // NUEVO: Actualizar usuario
+    
     @PostMapping("/actualizar/{username}")
     public ModelAndView actualizar(@PathVariable String username, @ModelAttribute Usuario usuario) {
         usuario.setUsername(username);
@@ -75,7 +75,7 @@ public class UserController {
         return mav;
     }
 
-    // NUEVO: Eliminar usuario
+    
     @GetMapping("/eliminar/{username}")
     public ModelAndView eliminar(@PathVariable String username) {
         userService.eliminar(username);

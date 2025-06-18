@@ -18,8 +18,8 @@ public class Pago {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	//acuerdate lo que viste en el video que a los nombres compuestos si te los guarda mal igual tienes que ponerle el 
-	//@Column(name = "fecha_prevista")
+	
+	
 	private LocalDate fechaPrevista;
 	private LocalDate fechaReal;
 	private int cantidadEsperada;

@@ -19,7 +19,7 @@ public class PropiedadController {
     @Autowired
     private UserRepository userRepository;
 
-    // Mostrar lista de propiedades
+    
     @GetMapping("/all")
     public ModelAndView listarPropiedades() {
         ModelAndView mav = new ModelAndView("propiedades/propiedades");
@@ -27,7 +27,7 @@ public class PropiedadController {
         return mav;
     }
 
-    // Mostrar formulario para crear propiedad
+    
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/crear")
     public ModelAndView mostrarFormulario() {
@@ -38,14 +38,14 @@ public class PropiedadController {
         return mav;
     }
 
-    // Guardar propiedad
+    
     @PostMapping("/crear")
     public ModelAndView guardar(@ModelAttribute Propiedad propiedad) {
         propiedadService.guardar(propiedad);
         return new ModelAndView("redirect:/propiedades/all");
     }
 
-    // NUEVO: Mostrar formulario de edición
+    
     @GetMapping("/editar/{id}")
     public ModelAndView mostrarFormularioEdicion(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("propiedades/propiedadForm");
@@ -57,7 +57,7 @@ public class PropiedadController {
         return mav;
     }
 
-    // NUEVO: Actualizar propiedad
+    
     @PostMapping("/actualizar/{id}")
     public ModelAndView actualizar(@PathVariable Long id, @ModelAttribute Propiedad propiedad) {
         propiedad.setId(id);
@@ -65,7 +65,7 @@ public class PropiedadController {
         return new ModelAndView("redirect:/propiedades/all");
     }
 
-    // Eliminar propiedad
+    
     @GetMapping("/eliminar/{id}")
     public ModelAndView eliminar(@PathVariable Long id) {
         propiedadService.eliminar(id);

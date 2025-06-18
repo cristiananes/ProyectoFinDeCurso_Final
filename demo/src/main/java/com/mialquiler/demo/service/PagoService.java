@@ -19,7 +19,7 @@ public class PagoService {
 
     public List<Pago> listarTodos() {
         List<Pago> pagos = pagoRepository.findAll();
-        // Calcular retraso automáticamente para cada pago
+        
         pagos.forEach(pago -> {
             pago.setRetraso(notificacionesService.calcularRetraso(pago));
         });
@@ -27,7 +27,7 @@ public class PagoService {
     }
 
     public void guardar(Pago pago) {
-        // Calcular retraso antes de guardar
+        
         pago.setRetraso(notificacionesService.calcularRetraso(pago));
         pagoRepository.save(pago);
     }
@@ -36,10 +36,10 @@ public class PagoService {
         return pagoRepository.findById(id);
     }
 
-    // NUEVO: Método actualizar
+    
     public void actualizar(Pago pago) {
         if (pagoRepository.existsById(pago.getId())) {
-            // Calcular retraso antes de actualizar
+            
             pago.setRetraso(notificacionesService.calcularRetraso(pago));
             pagoRepository.save(pago);
         } else {

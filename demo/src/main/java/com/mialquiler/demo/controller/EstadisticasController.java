@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-// PERMISO GENERAL: Cualquier usuario autenticado puede ver las estadísticas.
+
 @PreAuthorize("isAuthenticated()")
 public class EstadisticasController {
 
@@ -23,8 +23,8 @@ public class EstadisticasController {
 
         ModelAndView mav = new ModelAndView("estadisticas/estadisticas");
 
-        // NOTA: De nuevo, sería ideal filtrar estas estadísticas para que un inquilino
-        // o propietario solo vea las que le conciernen.
+        
+        
         mav.addObject("propiedadesDisponibles", estadisticasService.contarPropiedadesDisponibles());
         mav.addObject("propiedadesOcupadas", estadisticasService.contarPropiedadesOcupadas());
         mav.addObject("contratosPorVencer30Dias", estadisticasService.contarContratosPorVencer30Dias());
