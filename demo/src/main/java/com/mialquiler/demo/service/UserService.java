@@ -17,21 +17,21 @@ public class UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    // Cambiar rol a propietario
+    
     public Usuario cambiarRolToPropietario(Usuario usuario){
         usuario.setRol("PROPIETARIO");
         userRepository.save(usuario);
         return usuario;
     }
 
-    // Cambiar rol a inquilino
+    
     public Usuario cambiarRolToInquilino(Usuario usuario){
         usuario.setRol("INQUILINO");
         userRepository.save(usuario);
         return usuario;
     }
 
-    // Validar username único
+    
     public Boolean validarUsername(Usuario usuario){
         Optional<Usuario> user = userRepository.findById(usuario.getUsername());
         if (user.isEmpty()) {
@@ -44,10 +44,10 @@ public class UserService {
         }
     }
 
-    // NUEVO: Actualizar usuario
+    
     public void actualizar(Usuario usuario) {
         if (userRepository.existsById(usuario.getUsername())) {
-            // Mantener la contraseña si no se proporciona una nueva
+            
             if (usuario.getContrasenia() == null || usuario.getContrasenia().isEmpty()) {
                 Usuario usuarioExistente = userRepository.findById(usuario.getUsername()).get();
                 usuario.setContrasenia(usuarioExistente.getContrasenia());
@@ -61,7 +61,7 @@ public class UserService {
         }
     }
 
-    // NUEVO: Eliminar usuario (eliminación lógica)
+    
     public void eliminar(String username) {
         Optional<Usuario> usuario = userRepository.findById(username);
         if (usuario.isPresent()) {

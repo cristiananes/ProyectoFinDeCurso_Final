@@ -10,11 +10,11 @@ import java.util.List;
 public interface ContratoRepository extends JpaRepository<Contrato, Long> {
     long countByFechaFinBetween(LocalDate inicio, LocalDate fin);
 
-    // Sumar el precio de los contratos activos (estado = true)
+    
     @Query("SELECT SUM(c.precio) FROM Contrato c WHERE c.estado = true")
     Double sumPrecioByEstadoTrue();
 
-    // Contar contratos por fecha de inicio
+    
     long countByFechaInicioBetween(LocalDate inicio, LocalDate fin);
 
     List<Contrato> findByInquilino_Username(String username);

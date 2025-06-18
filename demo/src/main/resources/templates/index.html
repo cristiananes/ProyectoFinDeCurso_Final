@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+<html xmlns:th="http:
       th:replace="layout :: base('MiAlquiler - Dashboard', ~{::body})">
 <body>
 
@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <!-- Tarjetas de estadísticas -->
+    
     <div class="row mb-4">
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <!-- Sección de alertas y notificaciones -->
+    
     <div class="row">
         <div class="col-lg-6">
             <div class="card shadow mb-4">
@@ -139,7 +139,7 @@
         </div>
     </div>
 
-    <!-- Accesos rápidos -->
+    
     <div class="row" sec:authorize="hasRole('ADMIN')">
         <div class="col-12">
             <div class="card shadow">
@@ -177,7 +177,7 @@
                         </div>
                     </div>
 
-                    <!-- Segunda fila de accesos rápidos -->
+                    
                     <div class="row mt-3">
                         <div class="col-md-6 text-center mb-3">
                             <a href="/propiedad-contrato/crear" class="btn btn-secondary btn-lg btn-block">

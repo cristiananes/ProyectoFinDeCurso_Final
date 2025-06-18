@@ -18,7 +18,7 @@ public class Usuario {
     @Id
     private String username;
     private String nombre;
-    //poner un metodo que cambie los nombres del rol cuando registren una propiedad y andando
+    
     private String rol;
     private String tipoInquilino;
     private String email;

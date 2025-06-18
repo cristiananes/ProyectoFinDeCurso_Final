@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/pagos")
-// 1. PERMISO GENERAL: Cualquier usuario autenticado puede acceder.
+
 @PreAuthorize("isAuthenticated()")
 public class PagoController {
 
@@ -24,12 +24,12 @@ public class PagoController {
     @GetMapping("/all")
     public ModelAndView listarPagos() {
         ModelAndView mav = new ModelAndView("pagos/pagos");
-        // NOTA: Recuerda que aquí también necesitarás filtrar los pagos por usuario.
+        
         mav.addObject("pagos", pagoService.listarTodos());
         return mav;
     }
 
-    // 2. PERMISOS ESPECÍFICOS: Solo el ADMIN puede gestionar los pagos.
+    
     @GetMapping("/crear")
     @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView mostrarFormulario() {

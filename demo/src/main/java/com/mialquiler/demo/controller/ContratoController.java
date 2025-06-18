@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/contratos")
-// 1. PERMISO GENERAL: Permitimos que cualquier usuario autenticado acceda a las URLs de este controlador.
+
 @PreAuthorize("isAuthenticated()")
 public class ContratoController {
 
@@ -24,12 +24,12 @@ public class ContratoController {
     @GetMapping("/all")
     public ModelAndView listarContratos() {
         ModelAndView mav = new ModelAndView("contratos/contratos");
-        // IMPORTANTE: Esto sigue mostrando TODOS los contratos. Más abajo te explico cómo arreglarlo.
+        
         mav.addObject("contratos", contratoService.listarTodos());
         return mav;
     }
 
-    // 2. PERMISOS ESPECÍFICOS: Solo el ADMIN puede acceder a la URL para crear.
+    
     @GetMapping("/crear")
     @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView mostrarFormulario() {
@@ -46,7 +46,7 @@ public class ContratoController {
         return new ModelAndView("redirect:/contratos/all");
     }
 
-    // 3. Dejamos el acceso a la edición y eliminación solo para ADMIN.
+    
     @GetMapping("/editar/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView mostrarFormularioEdicion(@PathVariable Long id) {

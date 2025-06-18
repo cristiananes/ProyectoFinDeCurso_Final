@@ -24,35 +24,35 @@ public class EstadisticasService {
     @Autowired
     private UserRepository userRepository;
 
-    // 1. Contar propiedades disponibles
+    
     public long contarPropiedadesDisponibles() {
         return propiedadRepository.countByEstadoIgnoreCase("DISPONIBLE");
     }
 
-    // 2. Contar propiedades ocupadas
+    
     public long contarPropiedadesOcupadas() {
         return propiedadRepository.countByEstadoIgnoreCase("OCUPADA");
     }
 
-    // 3. Contratos que vencen en los próximos 30 días
+    
     public long contarContratosPorVencer30Dias() {
         LocalDate hoy = LocalDate.now();
         LocalDate limite = hoy.plusDays(30);
         return contratoRepository.countByFechaFinBetween(hoy, limite);
     }
-    // 4. Calcular ingresos mensuales totales
+    
     public Double calcularIngresosMensuales() {
         Double total = contratoRepository.sumPrecioByEstadoTrue();
         return total != null ? total : 0.0;
     }
 
-    // 5. PERSONALIZABLE: Contar contratos por año
+    
     public long contarContratosPorAnio(int anio) {
         LocalDate inicio = LocalDate.of(anio, 1, 1);
         LocalDate fin = LocalDate.of(anio, 12, 31);
         return contratoRepository.countByFechaInicioBetween(inicio, fin);
     }
-    // 6. PERSONALIZABLE: Contar pagos superiores a un monto
+    
     public long contarPagosSuperioresA(double monto) {
         return pagoRepository.countByCantidadEsperadaGreaterThan((int)monto);
     }
